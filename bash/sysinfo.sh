@@ -1,17 +1,26 @@
 #!/bin/bash
 
-#Prints computers FQDN
-echo 'Domain Name:'
-hostname --fqdn
+ComputerName=$(hostname --short)
 
-#Prints information about computer
-echo 'Host Info:'
-hostnamectl
+FQDNName=$(hostname --fqdn)
 
-#Prints every IP address except for IPs on the 127. network
-echo 'IP Addresses:'
-hostname -I | grep -v 127.*
+OperatingSys=$(hostnamectl | grep "Operating")
 
-#Prints disk space of Root
-echo 'Root Filesystem Size:'
-df -h /
+
+IpAddress=$(ip route | grep "link src" | awk '{print $9}')
+
+RootFileSpace=$(df -h / | awk '{print $4}' | grep -v "Avail")
+
+#Prints out the data in a report
+cat <<EOF
+
+	
+Report for $ComputerName:
+=========
+FQDN: $FQDNName
+$OperatingSys
+IP Address: $IpAddress
+Root Filesystem Free Space: $RootFileSpace
+
+=========
+EOF
