@@ -49,14 +49,12 @@ if [$? -ne 0]; then
 	fi
 fi
 
+#Commented out, unsure how to complete
 #Step 4:Add IP address to etc/hosts
 #Search /etc/hosts for container name
-grep COMP2101-S22 /etc/hosts
-if [$? -ne 0]; then
-	echo "Adding IP address to /etc/hosts file"
-	
-
-
+#grep COMP2101-S22 /etc/hosts
+#if [$? -ne 0]; then
+#	echo "Adding IP address to /etc/hosts file"
 
 #Step 5:Install Apache2
 #Checks to see if Apache2 is already installed
